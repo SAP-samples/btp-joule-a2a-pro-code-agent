@@ -1,0 +1,12 @@
+schema_version: 3.27.0
+
+metadata:
+  namespace: com.sap.paa
+  name: swiss_knife_sales_optimization_agent_a2a
+  version: 1.0.0
+  display_name: "Sales Optimization Agent A2A Connector"
+  description: Connects the Sales Optimization Agent to Joule for recommending adjustments to sales inquiries to maxmize sales conversion probability and reduce financial risk.
+
+system_aliases:
+  SalesOptimiztionAgent:
+    destination: SALES_OPTIMIZATION_AGENT_A2A

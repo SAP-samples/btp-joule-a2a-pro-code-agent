@@ -1,0 +1,86 @@
+_schema-version: "3.2"
+ID: webhook-cap
+version: 1.0.0
+description: "CAP webhook + SSE with React UI and Approuter on SAP BTP"
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        # Ensure dependencies and build artifacts
+        - npm install --prefix api
+        - npm run build --prefix api
+        - npm ci --prefix ui/sse-client
+        - npm run build --prefix ui/sse-client
+        # Copy UI build into approuter resources
+        - rm -rf router/resources
+        - mkdir -p router/resources
+        - cp -R ui/sse-client/dist/. router/resources/
+
+modules:
+  # --------------------- APPROUTER MODULE ---------------------
+  - name: webhook-cap-router
+    type: approuter.nodejs
+    path: ./router
+    build-parameters:
+      builder: npm
+      ignore:
+        - ".DS_Store"
+        - "node_modules/"
+        - "manifest*.yml"
+    parameters:
+      app-name: webhook-cap-router
+      disk-quota: 256MB
+      memory: 256MB
+      keep-existing-routes: true
+    requires:
+      - name: webhook-cap-uaa
+      - name: webhook-cap-srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          forwardAuthToken: true
+          strictSSL: false
+          url: ~{srv-url}
+          timeout: 600000
+    provides:
+      - name: webhook-cap-approuter
+        properties:
+          app-url: ${default-url}
+
+  # --------------------- CAP SRV MODULE ------------------------
+  - name: webhook-cap-srv
+    type: nodejs
+    path: ./api
+    build-parameters:
+      ignore:
+        - ".DS_Store"
+        - "manifest*.yml"
+        - "node_modules/"
+    parameters:
+      app-name: webhook-cap-srv
+      memory: 512MB
+      disk-quota: 512MB
+      command: node server.js
+    requires:
+      - name: webhook-cap-uaa
+    provides:
+      - name: webhook-cap-srv-api
+        properties:
+          srv-url: ${default-url}
+
+resources:
+  # ----------------------- XSUAA SERVICE ------------------------
+  - name: webhook-cap-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./api/xs-security.json
+      config:
+        xsappname: webhook-cap-server
+        tenant-mode: dedicated
+
+  # ----------------- DESTINATION SERVICE ----------------------

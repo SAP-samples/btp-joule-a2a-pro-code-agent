@@ -1,0 +1,15 @@
+{
+  "PORT": 5000,
+  "XS_APP_CONFIG_PATH": "./xs-app-local.json",
+  "destinations": [
+    {
+      "name": "local-api",
+      "url": "http://localhost:4006",
+      "timeout": 600000
+    },
+    {
+      "name": "local-ui",
+      "url": "http://localhost:5173"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+parameters:
+  - name: contextId
+    optional: true
+  - name: taskId
+    optional: true
+
+action_groups:
+  - actions:
+      - type: status-update
+        message: <? "Invoking Sales Optimization Agent" ?>
+      
+      - type: agent-request
+        agent_type: remote # indicates this is an A2A call
+        system_alias: SalesOptimiztionAgent # DESTINATION SALES_OPTIMIZATION_AGENT_A2A
+        body: >
+          <? (contextId == null || contextId.isEmpty()) && (taskId == null || taskId.isEmpty()) 
+             ? null 
+             : '{ "contextId": "' + contextId + '", "taskId": "' + taskId + '" }' ?>
+        result_variable: result
+      
+      - type: set-variables
+        variables:
+          - name: contextId
+            value: <? result.body.contextId ?>
+          - name: taskId
+            value: <? result.body.id ?>
+      
+      - type: message
+        message:
+          type: text
+          content: "<? result.body.status.message.parts[0].text ?> \n\n Context ID: <? result.body.contextId ?> - Task ID: <? result.body.id ?>"
+          markdown: true
+
+result:
+  contextId: "<? contextId ?>"
+  taskId: "<? taskId ?>"
+
+
+
+# - type: message
+#   message:
+#     type: text
+#     content: "<? result.body ?>"

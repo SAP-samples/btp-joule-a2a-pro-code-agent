@@ -1,0 +1,53 @@
+_schema-version: 3.3.0
+ID: code-based-agent
+version: 1.0.0
+description: "Custom code based a2a agent"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        # assumes you ran npm install once before, which you probably did
+        # don't want to run it on every single build
+        - npx cds build --production
+modules:
+  - name: code-based-agent-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: custom
+      commands:
+        - cp -r ../../patches ./patches
+        - npm ci --omit=dev
+      ignore:
+        - node_modules
+        - "srv/**/*.js.map"
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-uri}
+    requires:
+      - name: generative-ai-hub
+      - name: destination-service
+      - name: logging-service
+
+resources:
+  - name: generative-ai-hub
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: aicore
+      service-plan: extended
+  - name: destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+  - name: logging-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: application-logs
+      service-plan: lite

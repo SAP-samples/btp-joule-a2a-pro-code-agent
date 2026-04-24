@@ -1,0 +1,22 @@
+{
+    "name": "webhook-cap-workspace",
+    "version": "1.0.0",
+    "description": "Workspace scripts to run CAP API and React UI together",
+    "license": "ISC",
+    "private": true,
+    "scripts": {
+        "--------DEVELOPMENT-------": "",
+        "watch": "npx --yes npm-run-all --npm-path npm --parallel watch:api router watch:ui",
+        "watch:ui": "npm run start:vite-server",
+        "start:vite-server": "npm --prefix ./ui/sse-client run dev",
+        "watch:api": "npm run watch --prefix ./api",
+        "router": "npm run start:local --prefix ./router",
+        "--------BUILD & DEPLOY-------": "",
+        "build": "mbt build -p=cf -t=./mta_archives --mtar=webhook-server_1.0.0.mtar",
+        "deploy": "npm run build && cf deploy mta_archives/webhook-server_1.0.0.mtar",
+        "build:deploy": "npm run build && npm run deploy",
+        "------PARTIAL DEPLOYMENT------": "",
+        "build:api": "npm run build:cf --prefix ./api && mbt module-build -m=webhook-api -g",
+        "deploy:api": "cf deploy -m webhook-api"
+    }
+}

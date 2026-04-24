@@ -1,0 +1,50 @@
+{
+    "name": "order-screening-agent",
+    "version": "1.0.0",
+    "description": "A2A-compliant Pro-Code Agent built with CAP and LangGraph",
+    "repository": "https://github.com/SAP-samples/btp-joule-a2a-pro-code-agent",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@a2a-js/sdk": "0.3.10",
+        "@langchain/core": "^1.1.32",
+        "@langchain/langgraph": "^1.2.2",
+        "@sap-ai-sdk/langchain": "^2.8.0",
+        "@sap-ai-sdk/orchestration": "^2.8.0",
+        "@sap-ai-sdk/rpt": "^2.9.0",
+        "@sap/cds": "^9.7.1",
+        "@sap/xssec": "^4",
+        "patch-package": "^8.0.1",
+        "postinstall-postinstall": "^2.1.0",
+        "uuid": "^9.0.0",
+        "zod": "^3.25.2"
+    },
+    "engines": {
+        "node": "24.x"
+    },
+    "devDependencies": {
+        "@cap-js/cds-typer": ">=0.1",
+        "@cap-js/cds-types": "^0.16.0",
+        "@cap-js/sqlite": "^2",
+        "@sap/cds-dk": ">=9",
+        "@types/express": "^5.0.6",
+        "@types/node": "^22.18.10",
+        "tsx": "^4",
+        "typescript": "^5"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "watch": "cds-tsx watch --profile hybrid",
+        "deploy": "mbt build && cf deploy mta_archives/code-based-agent_1.0.0.mtar",
+        "postinstall": "npx patch-package"
+    },
+    "imports": {
+        "#cds-models/*": "./@cds-models/*/index.js"
+    },
+    "prettier": {
+        "singleQuote": false,
+        "trailingComma": "none",
+        "printWidth": 120,
+        "tabWidth": 4
+    }
+}

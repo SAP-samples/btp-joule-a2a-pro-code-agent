@@ -1,0 +1,11 @@
+schema_version: 1.5.0-beta
+name: sales_optimization_agent_a2a
+capabilities:
+  - type: local
+    name: sales_optimization_agent_a2a
+    folder: ./sales-optimization-agent
+
+enable_native_agenticness: false
+
+conversational_search:
+  enabled: false

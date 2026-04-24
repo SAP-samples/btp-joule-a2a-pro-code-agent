@@ -1,0 +1,14 @@
+{
+    "ALLOWED_PUSH_NOTIFICATION_URLS": [
+        "hana.ondemand.com",
+        "sap.com",
+        "localhost"
+    ],
+    "cds": {
+        "requires": {
+            "auth": {
+                "kind": "dummy"
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "webhook": {
+    "bearerToken": "eyabcdefg123457",
+    "bearerTokens": "",
+    "basicUser": "",
+    "basicPass": ""
+  }
+}

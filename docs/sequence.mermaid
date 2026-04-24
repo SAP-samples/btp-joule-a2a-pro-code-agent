@@ -1,0 +1,38 @@
+sequenceDiagram
+    autonumber
+    participant C as Customer (Altinova)
+    participant SYS as System (Task Center)
+    participant SU as Sales User
+    participant J as Joule (AI Copilot)
+    participant SOA as Sales Optimization Agent
+    participant ERP as ERP/Tools
+    participant RPT as RPT-1 (Forecasting Model)
+
+    C->>SYS: Sends Sales Inquiry
+    SYS->>SU: Displays new task in Task Center
+    SU->>J: "Please optimize latest Sales Inquiry from Altinova"
+    
+    Note over J,SOA: A2A (Agent-to-Agent) Protocol
+    J->>SOA: Delegates Optimization Task
+    
+    alt Missing Data?
+        SOA-->>SU: Ask for missing Details (e.g. Inquiry ID)
+        SU-->>SOA: Provides Details
+    end
+
+    SOA->>ERP: Fetch Payment Terms, Discounts, Master Data
+    ERP-->>SOA: Return Data Assets
+    
+    SOA->>SOA: Execute Tool: createFictionalSalesQuotations
+    
+    SOA->>RPT: Evaluate Variants (Conversion, Delay, Rating)
+    RPT-->>SOA: Return Predictions & Scoring
+    
+    opt Long Processing Time
+        SOA-->>J: Notify: Task will take longer
+        J-->>SU: Push Notification: Result is ready later
+    end
+
+    SOA->>J: Return Top 3 Quotations + Reasoning
+    J->>SU: Display Options for manual optimization
+    SU->>SYS: Finalize & Create Quotation
