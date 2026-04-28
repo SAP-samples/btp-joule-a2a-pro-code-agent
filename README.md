@@ -51,15 +51,15 @@ The repository is organized into modular components to simulate a distributed ag
 
 | Directory | Description |
 | :--- | :--- |
-| **`a2a-agent`** | The core Pro-Code Agent.<br>• Written in **TypeScript** on **CAP**.<br>• Uses **LangGraph** for agent logic.<br>• **A2A Compliant**.<br>• Connects to Generative AI Hub via SAP Cloud SDK for AI. |
-| **`joule-integration`** | Connecting **Joule** via the A2A protocol to the `a2a-agent` using action type [`agent-request`](./joule-integration/sales-optimization-agent/functions/call_agent.yaml#L12-L19). |
-| **`webhook-server`** | A WebSocket-based CAP server for handling A2A PushNotifications.<br>• **Backend (CAP):** Receives `StatusUpdates` from the agent.<br>• **Frontend (React.js):** Displays incoming status updates live. |
-| **`terraform`** | **Infrastructure as Code** for full E2E BTP setup.<br>• Provisions subaccount, Cloud Foundry, IAS trust, Joule, AI Core, HANA, and all service bindings.<br>• Uses **SAP BTP**, **Cloud Foundry**, and **SCI** Terraform providers. |
+| [**`a2a-agent`**](./a2a-agent/README.md) | The core Pro-Code Agent.<br>• Written in **TypeScript** on **CAP**.<br>• Uses **LangGraph** for agent logic.<br>• **A2A Compliant**.<br>• Connects to Generative AI Hub via SAP Cloud SDK for AI. |
+| [**`joule-integration`**](./joule-integration/README.md) | Connecting **Joule** via the A2A protocol to the `a2a-agent` using action type [`agent-request`](./joule-integration/sales-optimization-agent/functions/call_agent.yaml#L12-L19). |
+| [**`webhook-server`**](./webhook-server/README.md) | A WebSocket-based CAP server for handling A2A PushNotifications.<br>• **Backend (CAP):** Receives `StatusUpdates` from the agent.<br>• **Frontend (React.js):** Displays incoming status updates live. |
+| [**`terraform`**](./terraform/README.md) | **Infrastructure as Code** for full E2E BTP setup.<br>• Provisions subaccount, Cloud Foundry, IAS trust, Joule, AI Core, HANA, and all service bindings.<br>• Uses **SAP BTP**, **Cloud Foundry**, and **SCI** Terraform providers. |
 
 ## 🚦 Getting Started
 
 - [Local Setup](./a2a-agent/README.md)
-- [Infrastructure Setup (Terraform)](./terraform/README.md#-quick-start)
+- [Infrastructure Setup (Terraform)](./terraform/README.mdt)
 - [Deployment to Cloud Foundry](./a2a-agent/README.md#10-deployment-to-cloud-foundry)
 - [Joule Integration](./joule-integration/README.md)
 
