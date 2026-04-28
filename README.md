@@ -1,4 +1,4 @@
-# SwissKnife - Agent Interoperability and Northstar Proof Point
+# Reference Implementation for A2A-Compliant Pro-Code Agents on SAP BTP with Joule Integration
 
 Modular reference implementation covering a full-fledged agentic scenario end to end including Joule Integration via the A2A Protocol.
 
