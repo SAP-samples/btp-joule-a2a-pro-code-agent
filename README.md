@@ -1,4 +1,5 @@
 # Reference Implementation for A2A-Compliant Pro-Code Agents on SAP BTP with Joule Integration
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-joule-a2a-pro-code-agent)](https://api.reuse.software/info/github.com/SAP-samples/btp-joule-a2a-pro-code-agent)
 
 Modular reference implementation covering a full-fledged agentic scenario end to end including Joule Integration via the A2A Protocol.
 
