@@ -1,4 +1,4 @@
-# Reference Implementation for A2A-Compliant Pro-Code Agents on SAP BTP with Joule Integration
+# Reference Implementation for A2A-Compliant Pro-Code Agents on SAP BTP with Joule Integration and RPT-1
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-joule-a2a-pro-code-agent)](https://api.reuse.software/info/github.com/SAP-samples/btp-joule-a2a-pro-code-agent)
 
 Modular reference implementation covering a full-fledged agentic scenario end to end including Joule Integration via the A2A Protocol.
@@ -11,6 +11,7 @@ The primary goals of this project are:
 
 * **A2A Compliance:** Implementing [Agent-to-Agent (A2A) Protocol](https://a2a-protocol.org/latest/) compliant agents ("3rd Party Agents") to set scope, identify specification gaps, and contribute upstream fixes.
 * **Joule Integration:** Facilitating outbound A2A integration where **Joule** acts as the client for BTP-hosted or remotely hosted 3rd party agents.
+* Leveraging **SAP-RPT-1** to run use cases like forecasting (e.g., Payment Delay, New Product Introduction) or simulation.
 
 ## 🏗️ Architecture
 
